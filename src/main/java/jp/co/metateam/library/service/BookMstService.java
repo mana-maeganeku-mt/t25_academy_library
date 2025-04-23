@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.micrometer.common.util.StringUtils;
+import jp.co.metateam.library.model.AccountDto;
 import jp.co.metateam.library.model.BookMst;
 import jp.co.metateam.library.model.BookMstDto;
 import jp.co.metateam.library.repository.BookMstRepository;
@@ -19,12 +20,12 @@ import jp.co.metateam.library.repository.BookMstRepository;
 public class BookMstService {
 
     private final BookMstRepository bookMstRepository;
-    
+
     @Autowired
-    public BookMstService(BookMstRepository bookMstRepository){
+    public BookMstService(BookMstRepository bookMstRepository) {
         this.bookMstRepository = bookMstRepository;
     }
-    
+
     public List<BookMstDto> findAvailableWithStockCount() {
         List<BookMst> books = this.bookMstRepository.findLimitedBook();
         List<BookMstDto> bookMstDtoList = new ArrayList<BookMstDto>();
@@ -42,8 +43,30 @@ public class BookMstService {
 
         return bookMstDtoList;
     }
-    
+
+
+
+  @Transactional
+    public void save(BookMstDto bookMstDto) {
+    try {
+        // AccountDtoからAccountへの変換
+        BookMst bookMst = new BookMst();
+
+        bookMst.setTitle(bookMstDto.getTitle());
+        bookMst.setIsbn(bookMstDto.getIsbn());
+        
+
+        // データベースへの保存
+        this.bookMstRepository.save(bookMst);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+public BookMst selectByIsbn(String isbn) {
+    return this.bookMstRepository.selectByIsbn(isbn);
 }
 
-
+}
 
