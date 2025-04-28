@@ -1,73 +1,67 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{common :: meta_header('書籍登録',~{::link},~{::script})}">
-<title th:text="${title} + ' | MTLibrary'">書籍登録 | MTLibrary</title>
-<link rel="stylesheet" th:href="@{/css/book/add.css}" />
-<script type="text/javascript" th:src="@{/js/book/add.js}"></script>
+    <title th:text="${title} + ' | MTLibrary'">書籍登録 | MTLibrary</title>
+    <link rel="stylesheet" th:href="@{/css/book/add.css}" />
+    <script type="text/javascript" th:src="@{/js/book/add.js}"></script>
 </head>
- 
+
 <body>
-<div class="contents">
-<div th:replace="~{common :: main_sidebar}"></div>
- 
-    <div class="main_contents">
-<div th:replace="~{common :: header}"></div>
- 
-        <div class="inner_contents">
-<div class="page_title">書籍登録</div>
-<div class="page_contents">
- 
-                <div class="mb30 flexarea" style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-<span>
-<a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
-</span>
-</div>
- 
-                <form id="book_register_form" th:object="${bookMstDto}" th:action="@{/book/add}" method="post">
- 
-                    <div class="form-group">
-                    <label style="color: red;">*は必須項目です</label>
+    <div class="contents">
+        <div th:replace="~{common :: main_sidebar}"></div>
+        <div class="main_contents">
+            <div th:replace="~{common :: header}"></div>
+            <div class="inner_contents">
+                <div class="page_title">書籍登録</div>
+                <div class="page_contents">
+
+                    <div class="mb30 flexarea" style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                        <span>
+                            <a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
+                        </span>
                     </div>
- 
-                    <div class="form-group">
-                    <label for="book_name">書籍名</label>
-                    <label style="color:red;" for="book_name">*</label>
-                    <input type="text" id="book_name" name="title" th:field="*{title}"
 
-                               placeholder="書籍名を入力" style="padding:10px;" maxlength="255" />
- 
-                    <div class="error_msg" th:if="${#fields.hasErrors('title')}"
+                    <form id="book_register_form" th:object="${bookMstDto}" th:action="@{/book/add}" method="post">
 
-                             th:errors="*{title}" style="color:red;"></div>
-                      </div>
- 
-                    <div class="form-group">
-                    <label for="isbn">ISBN</label>
-                    <label style="color:red;" for="isbn">*</label>
-                    <input type="text" id="isbn" name="isbn" th:field="*{isbn}"
-
-                               placeholder="ISBNを入力" style="padding:10px;" maxlength="13" />
- 
-                        <div class="error_msg" th:if="${#fields.hasErrors('isbn')}"
-
-                             th:errors="*{isbn}" style="color:red;"></div>
+                        <div class="form-group">
+                            <label style="color: red;">*は必須項目です</label>
                         </div>
- 
-                    <div class="mb30 flexarea">
-                    <p style="text-align: center;">
-                    <input type="submit" value="保存" />
-                    </p>
-                    </div>
- 
-                </form>
- 
-            </div>
-</div>
-</div>
-</div>
- 
-<div th:replace="~{common :: footer}"></div>
-</body>
-</html>
 
- 
+                        <div class="form-group">
+                            <label for="book_name">書籍名</label>
+                            <label style="color:red;" for="book_name">*</label>
+                            <input type="text" id="book_name" name="title" th:field="*{title}" placeholder="書籍名を入力"
+                                style="padding:10px;" maxlength="255" />
+
+                            <div class="error_msg" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                                style="color:red;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <label style="color:red;" for="isbn">*</label>
+                            <input type="text" id="isbn" name="isbn" th:field="*{isbn}" placeholder="ISBNを入力"
+                                style="padding:10px;" maxlength="13" />
+
+                            <div class="error_msg" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+                                style="color:red;"></div>
+                        </div>
+
+                        <div class="mb30 flexarea">
+                            <p style="text-align: center;">
+                                <input type="submit" value="保存" />
+                            </p>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{common :: footer}"></div>
+</body>
+
+</html>

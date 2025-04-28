@@ -38,11 +38,12 @@ public class BookController {
     @GetMapping("/book/index")
     public String index(Model model) {
         // 書籍を全件取得
-        List<BookMstDto> bookMstList = this.bookMstService.findAvailableWithStockCount();
-
+        List<BookMstDto> bookMstList = this.bookMstService.findAvailableWithStockCount();//←書籍を全件取得している
+//List＝リスト（可変長、何でも入れる事ができる）　型＝BookMstDto　bookMstList（変数名）
         model.addAttribute("bookMstList", bookMstList);
-
+        //addAttributeはデータを受け取ったものを表示する役割
         return "book/index";
+        //書籍一覧画面に戻す
     }
 
     @GetMapping("/book/add")
@@ -53,7 +54,7 @@ public class BookController {
         return "book/add";
     }
 
-    @PostMapping("/book/add")
+    @PostMapping("/book/add")//("/book/add")に処理が飛んでくる
     public String addBook(@Valid @ModelAttribute BookMstDto bookMstDto, BindingResult result, RedirectAttributes ra) {
         if (result.hasErrors()) {
             ra.addFlashAttribute("bookMstDto", bookMstDto);
@@ -61,7 +62,7 @@ public class BookController {
             return "redirect:/book/add";
         }
 
-        boolean errTitleFlg = false;
+        boolean errTitleFlg = false;//エラーかどうかのフラグ
         boolean errIsbnFlg = false;
 
         List<String> errorMessages = new ArrayList<>();  // エラーメッセージのリスト
@@ -123,3 +124,4 @@ public class BookController {
         return "redirect:/book/index";
     }
 }
+
