@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{common :: meta_header('書籍一覧',~{::link},~{::script})}">
     <title th:text="${title}+' | MTLibrary'"></title>
     <link rel="stylesheet" th:href="@{/css/book/index.css}" />
     <script type="text/javascript" th:src="@{/js/book/index.js}"></script>
 </head>
+
 <body>
     <div class="contents">
         <div th:replace="~{common :: main_sidebar}"></div>
@@ -12,6 +14,31 @@
             <div th:replace="~{common :: header}"></div>
             <div class="inner_contens">
                 <div class="page_title">書籍一覧</div>
+            </div>
+            <dr>
+                <a th:href="@{/book/add}">
+                    <button style="float: right; background-color: rgb(157, 222, 157); color: black;">＋書籍登録</button>
+                  </a>             
+            </dr>
+            <div>
+                <label style="color:gray; margin-left: 160px;">書籍一覧</label>
+                <table class="books_table">
+                    <thead>
+                        <tr>
+                            <th>書籍名</th>
+                            <th>ISBN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="book : ${bookMstList}">
+                            <td th:text="${book.title}">書籍名</td>
+                            <td th:text="${book.isbn}">ISBN</td>
+                        </tr>
+                    </tbody>
+                    </thead>
+                </table>
+
+
             </div>
         </div>
     </div>
